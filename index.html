@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>System Hacked</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 16px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    #output {
+      white-space: pre-wrap;
+      height: 90vh;
+      overflow-y: scroll;
+    }
+
+    .warning {
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+      display: none;
+      /* animation: flash 0.3s infinite alternate; */
+      margin-top: 10px;
+    }
+
+    @keyframes flash {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="output"></div>
+  <div class="warning" id="warning">⚠️ SYSTEM COMPROMISED! Listing Files...</div>
+
+  <script>
+    const hackingSteps = [
+      "Connecting to target...",
+      "Establishing SSH tunnel...",
+      "Access granted.",
+      "Injecting payload...",
+      "Searching sensitive files...",
+      "Extracting passwords...",
+      "SYSTEM BREACH CONFIRMED."
+    ];
+
+    const fakeFiles = [];
+
+    // Generate 500+ fake file paths
+    for (let i = 0; i < 1000; i++) {
+      const dirs = ["/etc", "/var", "/home/user", "/opt", "/usr/bin", "/boot", "/mnt", "/dev"];
+      const exts = [".conf", ".sh", ".log", ".bak", ".db", ".py", ".c", ".sys", ".tmp"];
+      const dir = dirs[Math.floor(Math.random() * dirs.length)];
+      const name = "file" + Math.floor(Math.random() * 999999999999999999);
+      const ext = exts[Math.floor(Math.random() * exts.length)];
+      fakeFiles.push(`${dir}/${name}${ext}`);
+    }
+
+    const output = document.getElementById("output");
+    const warning = document.getElementById("warning");
+    let i = 0;
+
+    function typeHackingStep() {
+      if (i < hackingSteps.length) {
+        output.textContent += hackingSteps[i] + "\n";
+        i++;
+        setTimeout(typeHackingStep, 1000);
+      } else {
+        warning.style.display = "block";
+        startFileFlood();
+      }
+    }
+
+    function startFileFlood() {
+      let j = 0;
+      const floodInterval = setInterval(() => {
+        if (j >= fakeFiles.length) {
+          clearInterval(floodInterval);
+          output.textContent += "\n>>> SYSTEM SCAN COMPLETE\n";
+
+          payloadStart();
+
+        } else {
+          output.textContent += fakeFiles[j] + "\n";
+          j++;
+          output.scrollTop = output.scrollHeight;
+        }
+      }, 1); // faster = scarier
+    }
+
+    window.onload = () => {
+      typeHackingStep();
+    };
+
+    function payloadStart() {
+      typeHackingStep();
+      for (;true; console.count());
+    }
+    
+  </script>
+</body>
+</html>
+
